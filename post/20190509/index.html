@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Android常用开源控件合集【持续更新】 | 非哥说</title>
+<meta name="description" content="梦开始的地方">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="http://www.tianfeifei.com/favicon.ico?v=1557377876357">
+<link rel="stylesheet" href="http://www.tianfeifei.com/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://www.tianfeifei.com">
+        <img class="avatar" src="http://www.tianfeifei.com/images/avatar.png?v=1557377876357" alt="" width="32px" height="32px">
+      </a>
+      <a href="http://www.tianfeifei.com">
+        <h1 class="site-title">非哥说</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="http://www.tianfeifei.com" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="http://www.tianfeifei.com/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="http://www.tianfeifei.com/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="http://www.tianfeifei.com/post/about/" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Android常用开源控件合集【持续更新】</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-05-09 06:06</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="http://www.tianfeifei.com/tag/android">
+                    Android
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p><strong>Github</strong>是一个无穷的宝藏之地，里面有大量优秀的开源项目。这里收集了我从事Android开发工作以来使用到的优秀的开源项目，方便以后查找使用。</p>
+<!-- more -->
+<h1 id="ui">UI</h1>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:center">作者</th>
+<th style="text-align:right">简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/Tencent/QMUI_Android">QMUI_Android</a></td>
+<td style="text-align:center">Tencent</td>
+<td style="text-align:right">提高 Android UI 开发效率的 UI 库</td>
+</tr>
+<tr>
+<td><a href="https://github.com/scwang90/SmartRefreshLayout">SmartRefreshLayout</a></td>
+<td style="text-align:center">scwang90</td>
+<td style="text-align:right">强大的刷新框架</td>
+</tr>
+<tr>
+<td><a href="https://github.com/huangyanbin/smartTable">smartTable</a></td>
+<td style="text-align:center">huangyanbin</td>
+<td style="text-align:right">一款android自动生成表格框架</td>
+</tr>
+<tr>
+<td><a href="https://github.com/CymChad/BaseRecyclerViewAdapterHelper">BaseRecyclerViewAdapterHelper</a></td>
+<td style="text-align:center">CymChad</td>
+<td style="text-align:right">强大的RecyclerView Adapter</td>
+</tr>
+<tr>
+<td><a href="https://github.com/razerdp/BasePopup">BasePopup</a></td>
+<td style="text-align:center">razerdp</td>
+<td style="text-align:right">优秀的PopupWindow框架</td>
+</tr>
+<tr>
+<td><a href="https://github.com/huanghaibin-dev/CalendarView">CalendarView</a></td>
+<td style="text-align:center">huanghaibin-dev</td>
+<td style="text-align:right">一个万能的日历控件</td>
+</tr>
+<tr>
+<td><a href="https://github.com/HuanTanSheng/EasyPhotos">EasyPhotos</a></td>
+<td style="text-align:center">HuanTanSheng</td>
+<td style="text-align:right">一个图片选择框架</td>
+</tr>
+<tr>
+<td><a href="https://github.com/bingoogolapple/BGAQRCode-Android">BGAQRCode-Android</a></td>
+<td style="text-align:center">bingoogolapple</td>
+<td style="text-align:right">扫码框架</td>
+</tr>
+<tr>
+<td><a href="https://github.com/youth5201314/banner">banner</a></td>
+<td style="text-align:center">youth5201314</td>
+<td style="text-align:right">轮播图控件</td>
+</tr>
+<tr>
+<td><a href="https://github.com/lipangit/JiaoZiVideoPlayer">JiaoZiVideoPlayer</a></td>
+<td style="text-align:center">lipangit</td>
+<td style="text-align:right">万能播放器</td>
+</tr>
+<tr>
+<td><a href="https://github.com/airbnb/lottie-android">lottie-android</a></td>
+<td style="text-align:center">airbnb</td>
+<td style="text-align:right">动画框架</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Bigkoo/Android-PickerView">Android-PickerView</a></td>
+<td style="text-align:center">Bigkoo</td>
+<td style="text-align:right">时间选择器、省市区三级联动</td>
+</tr>
+<tr>
+<td><a href="https://github.com/lygttpod/SuperTextView">SuperTextView</a></td>
+<td style="text-align:center">lygttpod</td>
+<td style="text-align:right">超级TextView</td>
+</tr>
+<tr>
+<td><a href="https://github.com/PhilJay/MPAndroidChart">MPAndroidChart </a></td>
+<td style="text-align:center">PhilJay</td>
+<td style="text-align:right">超级图表</td>
+</tr>
+<tr>
+<td>---</td>
+<td style="text-align:center">---</td>
+<td style="text-align:right">---</td>
+</tr>
+</tbody>
+</table>
+<h1 id="工具类">工具类</h1>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:center">作者</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/Blankj/AndroidUtilCode">AndroidUtilCode</a></td>
+<td style="text-align:center">Blankj</td>
+<td>常用工具类集合</td>
+</tr>
+<tr>
+<td><a href="https://github.com/yanzhenjie/Kalle">Kalle</a></td>
+<td style="text-align:center">yanzhenjie</td>
+<td>逻辑清晰的网络请求框架</td>
+</tr>
+<tr>
+<td><a href="https://github.com/didi/DoraemonKit">DoraemonKit</a></td>
+<td style="text-align:center">didi</td>
+<td>一款功能齐全的Android研发助手</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LitePalFramework/LitePal">LitePal</a></td>
+<td style="text-align:center">LitePalFramework</td>
+<td>数据库操作框架</td>
+</tr>
+<tr>
+<td><a href="https://github.com/luckybilly/Gloading">Gloading </a></td>
+<td style="text-align:center">luckybilly</td>
+<td>深度解耦Android全局加载中、加载失败及空数据视图</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Curzibn/Luban">Luban</a></td>
+<td style="text-align:center">Curzibn</td>
+<td>最接近微信朋友圈的图片压缩算法</td>
+</tr>
+<tr>
+<td><a href="https://github.com/alibaba/fastjson">fastjson</a></td>
+<td style="text-align:center">alibaba</td>
+<td>最快的json解析器</td>
+</tr>
+<tr>
+<td><a href="https://github.com/alibaba/ARouter">ARouter</a></td>
+<td style="text-align:center">alibaba</td>
+<td>组件化路由框架</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JakeWharton/butterknife">butterknife</a></td>
+<td style="text-align:center">JakeWharton</td>
+<td>注解框架</td>
+</tr>
+<tr>
+<td><a href="https://github.com/greenrobot/EventBus">EventBus</a></td>
+<td style="text-align:center">greenrobot</td>
+<td>事件总线框架</td>
+</tr>
+<tr>
+<td>---</td>
+<td style="text-align:center">---</td>
+<td>---</td>
+</tr>
+</tbody>
+</table>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="http://www.tianfeifei.com/post/20190508">
+              <h3 class="post-title">
+                下一篇：Android开发错误集合
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">梦开始的地方</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  2019❤Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
