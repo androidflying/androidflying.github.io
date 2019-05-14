@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>Android开发错误集合 | 非哥说</title>
+<title>【自己造轮子】发布远程依赖库之jitpack.io | 非哥说</title>
 <meta name="description" content="梦开始的地方">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -85,18 +85,18 @@
       <div class="content-container">
         <div class="post-detail">
           
-            <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20190508.png')">
+            <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20190513.png')">
             </div>
           
-          <h2 class="post-title">Android开发错误集合</h2>
+          <h2 class="post-title">【自己造轮子】发布远程依赖库之jitpack.io</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-05-08 15:00</span>
+            <span><i class="icon-calendar-outline"></i> 2019-05-13 10:00</span>
             
               <span>
                 <i class="icon-pricetags-outline"></i>
                 
-                  <a href="http://www.tianfeifei.com/tag/bug">
-                    Bug
+                  <a href="http://www.tianfeifei.com/tag/tools">
+                    工具
                     
                       ，
                     
@@ -111,26 +111,87 @@
             
           </div>
           <div class="post-content">
-            <p>本篇收录日常Android开发中遇到的问题以及解决思路。</p>
+            <p>在gradle的加持下，使用第三方开源库的时候只需要在<code>build.gradle</code>中引用依赖就可以了。那我们想把自己写的库也按照这种便捷的方式让别人使用该怎么办呢？今天就为你揭晓答案！</p>
 <!-- more --> 
-<ol>
-<li>Android studio Program type already present: <code>com.****.BuildConfig</code>【2019-05-08】</li>
-</ol>
+<h1 id="想要的结果">想要的结果</h1>
+<p>在Android Studio中使用<code>implementation 'com.github.ithomasoft:JsoupHelper:1.0.0'</code>就能使用我们自己的库。
+格式就是 <strong>implementation 'com.github.GitHub昵称:开源库名称:版本号'</strong>。</p>
+<h1 id="开始造轮子">开始造轮子</h1>
+<h2 id="以开源库名称新建一个项目">以开源库名称新建一个项目。</h2>
+<p>例如
+<img src="http://www.tianfeifei.com/post-images/1557742011201.png" alt=""></p>
+<h2 id="然后新建或者引入library">然后新建或者引入Library</h2>
+<p>例如
+<img src="http://www.tianfeifei.com/post-images/1557742157463.png" alt=""></p>
+<h2 id="在根目录的buildgradle文件中加入插件">在根目录的build.gradle文件中加入插件</h2>
+<pre><code>buildscript {
+...
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+				classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+...
+    }
+</code></pre>
+<p><a href="https://github.com/dcendents/android-maven-gradle-plugin">点击查看插件最新版</a></p>
+<h2 id="在library的buildgradle中加入依赖">在Library的build.gradle中加入依赖</h2>
+<pre><code>apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.ithomasoft'
+</code></pre>
 <blockquote>
-<p><strong>【错误原因】</strong> Android studio 抛错，是因为有2个module在 AndroidManifest.xml 里面具有一样的package name。
-<strong>【解决方案】</strong> 将module中的AndroidManifest.xml中的packagename修改成不同名字即可。</p>
+<p>下面这一句是:group='com.github.你的github昵称'</p>
 </blockquote>
-<p>2.在lib-module中使用ButterKnife需要使用R2。不能使用switch 来判断resId，必须使用if-else来进行判断。
-2. 待续。。。</p>
+<h2 id="将项目提交到github上">将项目提交到github上</h2>
+<p><img src="http://www.tianfeifei.com/post-images/1557797004276.png" alt=""></p>
+<h2 id="在github上对上传的项目创建一个releases版本">在github上对上传的项目创建一个releases版本</h2>
+<p><img src="http://www.tianfeifei.com/post-images/1557797333602.png" alt=""></p>
+<blockquote>
+<p>注意，这里填写的就是引用依赖库时候的版本号，可以不加“v”</p>
+</blockquote>
+<p>到这里轮子就造好了</p>
+<h1 id="装车">装车</h1>
+<h2 id="打开jitpackio并使用github注册登录">打开<a href="https://jitpack.io">jitpack.io</a>，并使用Github注册登录。</h2>
+<p><img src="http://www.tianfeifei.com/post-images/1557797634673.png" alt=""></p>
+<blockquote>
+<p>输入你的GitHub昵称/你开源库的名称,然后点Look up按钮。
+<img src="http://www.tianfeifei.com/post-images/1557797809194.png" alt="">
+当你看到有你创建的release，并且Log图标为绿时，说明创建成功。</p>
+</blockquote>
+<h1 id="开车">开车</h1>
+<h2 id="在项目的buildgradle中添加jitpack的地址">在项目的build.gradle中添加JitPack的地址</h2>
+<pre><code>allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+</code></pre>
+<h2 id="在module的buildgradle中添加依赖">在module的build.gradle中添加依赖</h2>
+<pre><code>dependencies {
+	        implementation 'com.github.ithomasoft:jsouphelper:1.0.0'
+	}
+</code></pre>
+<h2 id="同步项目">同步项目</h2>
+<p>rebuild一下项目，就可以使用了
+<img src="http://www.tianfeifei.com/post-images/1557798403769.png" alt=""></p>
+<blockquote>
+<p>可以看到我们已经引用成功。</p>
+</blockquote>
+<h1 id="注意事项">注意事项</h1>
+<ul>
+<li>在对依赖库进行迭代的时候，需要手动点击<strong>Get it</strong>！</li>
+<li>Library的build.gradle中版本号尽量和你创建的版本号保持一致。</li>
+<li>待续。。。</li>
+</ul>
 
           </div>
         </div>
 
         
           <div class="next-post">
-            <a class="purple-link" href="http://www.tianfeifei.com/post/20190507">
+            <a class="purple-link" href="http://www.tianfeifei.com/post/20190509">
               <h3 class="post-title">
-                下一篇：架构设计(一)
+                下一篇：Android常用开源控件合集【持续更新】
               </h3>
             </a>
           </div>
