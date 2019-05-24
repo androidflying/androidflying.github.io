@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>【自己造轮子】发布远程依赖库之jitpack.io | 非哥说</title>
+<title>使用fir.im和钉钉进行测试包的发布与管理 | 非哥说</title>
 <meta name="description" content="梦开始的地方">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -85,12 +85,12 @@
       <div class="content-container">
         <div class="post-detail">
           
-            <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20190513.png')">
+            <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20190524.jpg')">
             </div>
           
-          <h2 class="post-title">【自己造轮子】发布远程依赖库之jitpack.io</h2>
+          <h2 class="post-title">使用fir.im和钉钉进行测试包的发布与管理</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-05-13 10:00</span>
+            <span><i class="icon-calendar-outline"></i> 2019-05-24 18:00</span>
             
               <span>
                 <i class="icon-pricetags-outline"></i>
@@ -111,87 +111,62 @@
             
           </div>
           <div class="post-content">
-            <p>在gradle的加持下，使用第三方开源库的时候只需要在<code>build.gradle</code>中引用依赖就可以了。那我们想把自己写的库也按照这种便捷的方式让别人使用该怎么办呢？今天就为你揭晓答案！</p>
-<!-- more --> 
-<h1 id="想要的结果">想要的结果</h1>
-<p>在Android Studio中使用<code>implementation 'com.github.ithomasoft:JsoupHelper:1.0.0'</code>就能使用我们自己的库。
-格式就是 <strong>implementation 'com.github.GitHub昵称:开源库名称:版本号'</strong>。</p>
-<h1 id="开始造轮子">开始造轮子</h1>
-<h2 id="以开源库名称新建一个项目">以开源库名称新建一个项目。</h2>
-<p>例如
-<img src="http://www.tianfeifei.com/post-images/1557742011201.png" alt=""></p>
-<h2 id="然后新建或者引入library">然后新建或者引入Library</h2>
-<p>例如
-<img src="http://www.tianfeifei.com/post-images/1557742157463.png" alt=""></p>
-<h2 id="在根目录的buildgradle文件中加入插件">在根目录的build.gradle文件中加入插件</h2>
-<pre><code>buildscript {
-...
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-		classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-...
-    }
-</code></pre>
-<p><a href="https://github.com/dcendents/android-maven-gradle-plugin">点击查看插件最新版</a></p>
-<h2 id="在library的buildgradle中加入依赖">在Library的build.gradle中加入依赖</h2>
-<pre><code>apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.ithomasoft'
-</code></pre>
-<blockquote>
-<p>下面这一句是:group='com.github.你的github昵称'</p>
-</blockquote>
-<h2 id="将项目提交到github上">将项目提交到github上</h2>
-<p><img src="http://www.tianfeifei.com/post-images/1557797004276.png" alt=""></p>
-<h2 id="在github上对上传的项目创建一个releases版本">在github上对上传的项目创建一个releases版本</h2>
-<p><img src="http://www.tianfeifei.com/post-images/1557797333602.png" alt=""></p>
-<blockquote>
-<p>注意，这里填写的就是引用依赖库时候的版本号，可以不加“v”</p>
-</blockquote>
-<p>到这里轮子就造好了</p>
-<h1 id="装车">装车</h1>
-<h2 id="打开jitpackio并使用github注册登录">打开<a href="https://jitpack.io">jitpack.io</a>，并使用Github注册登录。</h2>
-<p><img src="http://www.tianfeifei.com/post-images/1557797634673.png" alt=""></p>
-<blockquote>
-<p>输入你的GitHub昵称/你开源库的名称,然后点Look up按钮。
-<img src="http://www.tianfeifei.com/post-images/1557797809194.png" alt="">
-当你看到有你创建的release，并且Log图标为绿时，说明创建成功。</p>
-</blockquote>
-<h1 id="开车">开车</h1>
-<h2 id="在项目的buildgradle中添加jitpack的地址">在项目的build.gradle中添加JitPack的地址</h2>
-<pre><code>allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
-</code></pre>
-<h2 id="在module的buildgradle中添加依赖">在module的build.gradle中添加依赖</h2>
-<pre><code>dependencies {
-	        implementation 'com.github.ithomasoft:jsouphelper:1.0.0'
-	}
-</code></pre>
-<h2 id="同步项目">同步项目</h2>
-<p>rebuild一下项目，就可以使用了
-<img src="http://www.tianfeifei.com/post-images/1557798403769.png" alt=""></p>
-<blockquote>
-<p>可以看到我们已经引用成功。</p>
-</blockquote>
-<h1 id="注意事项">注意事项</h1>
-<ul>
-<li>在对依赖库进行迭代的时候，需要手动点击<strong>Get it</strong>！</li>
-<li>Library的build.gradle中版本号尽量和你创建的版本号保持一致。</li>
-<li>待续。。。</li>
-</ul>
+            <p>这一星期大部分时间都浪费在和国外同事沟通上了，最后发现是国外同事使用的测试包不一样~
+无语死了，为避免重蹈覆辙，在项目组中对测试流程进行了优化和规范，以减少沟通成本。</p>
+ <!-- more --> 
+<h1 id="firim简介">fir.im简介</h1>
+<p><a href="https://fir.im/">fir.im</a>是一款强大的免费应用内测托管平台，可以进行应用内测。</p>
+<h2 id="注册账号">注册账号</h2>
+<p>打开<a href="https://account.fir.im/users/sign_up">注册页面</a>进行账号注册。</p>
+<h2 id="登录账号">登录账号</h2>
+<p>打开<a href="https://account.fir.im/signin">登录页面</a>进行账号登录。</p>
+<h2 id="应用管理">应用管理</h2>
+<p>打开<a href="https://fir.im/apps">应用管理页面</a>进行应用管理。</p>
+<h1 id="使用firim">使用fir.im</h1>
+<h2 id="在网页上使用firim">在网页上使用fir.im</h2>
+<p>傻瓜式操作，暂不介绍。</p>
+<h2 id="在android-studio中使用firim">在Android Studio中使用fir.im</h2>
+<h3 id="下载安装firim-upload插件">下载安装【fir.im upload】插件</h3>
+<p><img src="http://www.tianfeifei.com/post-images/1558691915156.png" alt="">
+重启Android Studio。
+插件会在Views -&gt; tool windows显示 FIR.im。
+会在右边的侧栏显示功能按键
+<img src="http://www.tianfeifei.com/post-images/1558692125168.png" alt=""></p>
+<h3 id="功能页面">功能页面</h3>
+<p><img src="http://www.tianfeifei.com/post-images/1558692393490.png" alt=""></p>
+<h3 id="设置api_token">设置api_token</h3>
+<p><img src="http://www.tianfeifei.com/post-images/1558692524092.png" alt="在这里查看API_TOKEN"></p>
+<h3 id="上传测试apk">上传测试apk</h3>
+<p>到这里就上传成功了。</p>
+<h1 id="使用钉钉机器人告诉同事">使用钉钉机器人告诉同事</h1>
+<h2 id="添加钉钉机器人">添加钉钉机器人</h2>
+<h3 id="在群设置里选择添加群机器人">在群设置里选择添加群机器人</h3>
+<p>选择自定义
+<img src="http://www.tianfeifei.com/post-images/1558692848466.png" alt="">
+复制webhook
+<img src="http://www.tianfeifei.com/post-images/1558692919312.png" alt=""></p>
+<h2 id="在firim中配置钉钉webhook">在fir.im中配置钉钉webhook</h2>
+<h3 id="打开上传的应用详情页面">打开上传的应用详情页面</h3>
+<p>选择【集成】模块
+<img src="http://www.tianfeifei.com/post-images/1558693082334.png" alt=""></p>
+<h3 id="配置钉钉消息推送">配置钉钉消息推送</h3>
+<p><img src="http://www.tianfeifei.com/post-images/1558693213816.png" alt="">
+把在钉钉上复制的webhook填写在webhook url
+<img src="http://www.tianfeifei.com/post-images/1558693287509.png" alt="">
+到这里就完成了！！</p>
+<h1 id="效果">效果</h1>
+<p>在Android Studio中使用fir.im插件上传测试包后，钉钉群里就会推送一条消息
+<img src="http://www.tianfeifei.com/post-images/1558693420739.png" alt="">
+这样你就不用再给相关人员发包了，他们也不会漏掉了。</p>
 
           </div>
         </div>
 
         
           <div class="next-post">
-            <a class="purple-link" href="http://www.tianfeifei.com/post/20190509">
+            <a class="purple-link" href="http://www.tianfeifei.com/post/20190513">
               <h3 class="post-title">
-                下一篇：Android常用开源控件合集【持续更新】
+                下一篇：【自己造轮子】发布远程依赖库之jitpack.io
               </h3>
             </a>
           </div>
