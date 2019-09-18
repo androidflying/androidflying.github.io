@@ -1,15 +1,18 @@
+
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
+    
+<meta charset="utf-8" >
 
 <title>【禅道】禅道的基本使用（开篇） | 非哥说</title>
 <meta name="description" content="梦开始的地方">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="http://www.tianfeifei.com/favicon.ico?v=1568769188018">
+<link rel="shortcut icon" href="http://www.tianfeifei.com/favicon.ico?v=1568770126565">
 <link rel="stylesheet" href="http://www.tianfeifei.com/styles/main.css">
 
 
@@ -23,94 +26,91 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
 
 
   </head>
   <body>
     <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="http://www.tianfeifei.com">
-        <img src="http://www.tianfeifei.com/images/avatar.png?v=1568769188018" class="site-logo">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://www.tianfeifei.com">
+        <img class="avatar" src="http://www.tianfeifei.com/images/avatar.png?v=1568770126565" alt="" width="32px" height="32px">
+      </a>
+      <a href="http://www.tianfeifei.com">
         <h1 class="site-title">非哥说</h1>
       </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
     </div>
-    <div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
       
         
-          <a href="http://www.tianfeifei.com" class="site-nav">
+          <a href="http://www.tianfeifei.com" class="menu purple-link">
             首页
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/archives" class="site-nav">
+          <a href="http://www.tianfeifei.com/archives" class="menu purple-link">
             归档
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/tags" class="site-nav">
+          <a href="http://www.tianfeifei.com/tags" class="menu purple-link">
             标签
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/post/about/" class="site-nav">
+          <a href="http://www.tianfeifei.com/post/about/" class="menu purple-link">
             关于
           </a>
         
       
         
-          <a href="http://so.tianfeifei.com" class="site-nav" target="_blank">
+          <a class="menu purple-link" href="http://so.tianfeifei.com" class="menu" target="_blank">
             导航
           </a>
         
       
     </div>
   </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    </div>
-    <div class="site-description">
-      梦开始的地方
-    </div>
-    <div class="site-footer">
-      2019❤Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-    </div>
-  </div>
-</div>
+</transition>
 
 
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">【禅道】禅道的基本使用（开篇）</h2>
-            <div class="post-date">2019-08-08 21:09</div>
+      <div class="content-container">
+        <div class="post-detail">
+          
+            <div class="feature-container" style="background-image: url('https://www.zentao.net/file.php?f=source/default/wide/zen-banner1.jpg&amp;t=jpg&amp;o=source&amp;s=&amp;v=1564714901')">
+            </div>
+          
+          <h2 class="post-title">【禅道】禅道的基本使用（开篇）</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-08-08 21:09</span>
             
-              <div class="feature-container" style="background-image: url('https://www.zentao.net/file.php?f=source/default/wide/zen-banner1.jpg&amp;t=jpg&amp;o=source&amp;s=&amp;v=1564714901')">
-              </div>
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="http://www.tianfeifei.com/tag/tools">
+                    工具
+                    
+                  </a>
+                
+              </span>
             
-            <div class="post-content">
-              <p>不得不说，禅道是一个专业的项目研发管理软件。</p>
+          </div>
+          <div class="post-content">
+            <p>不得不说，禅道是一个专业的项目研发管理软件。</p>
 <!-- more -->
 <p>自己作为一个开发，在工作的这几年一直有使用禅道。<br>
 在之前的工作中，我只是站在了开发角度去了解禅道，使用禅道；没有对禅道的架构进行过了解使用。<br>
@@ -132,46 +132,49 @@
 在研发实现需求后，从编程角度对需求进行检验。</p>
 <p>了解了这三个角色在禅道中的位置关系，那么无论项目人员怎么配置、怎么兼职，我们都按照基本流程走下去，就能提高效率、减少沟通成本，最重要的就是不会出差错！</p>
 
-            </div>
-            
-              <div class="tag-container">
-                
-                  <a href="http://www.tianfeifei.com/tag/tools" class="tag">
-                    工具
-                  </a>
-                
-              </div>
-            
-            
-              <div class="next-post">
-                <div class="next">下一篇</div>
-                <a href="http://www.tianfeifei.com/post/20190613">
-                  <h3 class="post-title">
-                    颜色透明度16进制对照表
-                  </h3>
-                </a>
-              </div>
-            
-
-            
-              
-                <div id="gitalk-container" data-aos="fade-in"></div>
-              
-
-              
-            
-
           </div>
-
         </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="http://www.tianfeifei.com/post/20190613">
+              <h3 class="post-title">
+                下一篇：颜色透明度16进制对照表
+              </h3>
+            </a>
+          </div>
+          
       </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">梦开始的地方</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  2019❤Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</div>
+
+
     </div>
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
-<script type="application/javascript">
-
-AOS.init();
+    <script type="application/javascript">
 
 hljs.initHighlightingOnLoad()
 
