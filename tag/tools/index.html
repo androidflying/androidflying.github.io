@@ -1,18 +1,15 @@
-
 <!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
+    <meta charset="utf-8" >
 
 <title>工具 | 非哥说</title>
 <meta name="description" content="梦开始的地方">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="http://www.tianfeifei.com/favicon.ico?v=1568767943049">
+<link rel="shortcut icon" href="http://www.tianfeifei.com/favicon.ico?v=1568769188018">
 <link rel="stylesheet" href="http://www.tianfeifei.com/styles/main.css">
 
 
@@ -20,330 +17,224 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
 
 
   </head>
   <body>
     <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="http://www.tianfeifei.com">
-        <img class="avatar" src="http://www.tianfeifei.com/images/avatar.png?v=1568767943049" alt="" width="32px" height="32px">
-      </a>
-      <a href="http://www.tianfeifei.com">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="http://www.tianfeifei.com">
+        <img src="http://www.tianfeifei.com/images/avatar.png?v=1568769188018" class="site-logo">
         <h1 class="site-title">非哥说</h1>
       </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
     </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
-  </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
+    <div>
       
         
-          <a href="http://www.tianfeifei.com" class="menu purple-link">
+          <a href="http://www.tianfeifei.com" class="site-nav">
             首页
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/archives" class="menu purple-link">
+          <a href="http://www.tianfeifei.com/archives" class="site-nav">
             归档
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/tags" class="menu purple-link">
+          <a href="http://www.tianfeifei.com/tags" class="site-nav">
             标签
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/post/about/" class="menu purple-link">
+          <a href="http://www.tianfeifei.com/post/about/" class="site-nav">
             关于
           </a>
         
       
         
-          <a class="menu purple-link" href="http://so.tianfeifei.com" class="menu" target="_blank">
+          <a href="http://so.tianfeifei.com" class="site-nav" target="_blank">
             导航
           </a>
         
       
     </div>
   </div>
-</transition>
-
-
-      <div class="content-container">
-
-        <div class="current-tag-container">
-          <h2 class="title">
-            <i class="icon icon-pricetags-outline"></i> 工具
-          </h2> 
-        </div>
-
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
         
-<section class="post-item">
-    <div class="content">
-      <a href="http://www.tianfeifei.com/post/20190809">
-        <h2 class="post-title">【禅道】禅道的设计理念（二）</h2>
-      </a>
-      <div class="post-abstract">
-        <p>时间就是金钱，敏捷开发才是王道！</p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-08-09 21:42</span>
+      
         
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="http://www.tianfeifei.com/tag/tools">
-                工具
-                
-              </a>
-            
-          </span>
+      
         
-      </div>
+      
+        
+      
+        
+      
     </div>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="http://www.tianfeifei.com/post/20190808">
-        <h2 class="post-title">【禅道】禅道的基本使用（开篇）</h2>
-      </a>
-      <div class="post-abstract">
-        <p>不得不说，禅道是一个专业的项目研发管理软件。</p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-08-08 21:09</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="http://www.tianfeifei.com/tag/tools">
-                工具
-                
-              </a>
-            
-          </span>
-        
-      </div>
+    <div class="site-description">
+      梦开始的地方
     </div>
-    
-      <a href="http://www.tianfeifei.com/post/20190808">
-        <div class="feature-container" style="background-image: url('https://www.zentao.net/file.php?f=source/default/wide/zen-banner1.jpg&amp;t=jpg&amp;o=source&amp;s=&amp;v=1564714901')">
-        </div>
-      </a>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="http://www.tianfeifei.com/post/20190613">
-        <h2 class="post-title">颜色透明度16进制对照表</h2>
-      </a>
-      <div class="post-abstract">
-        <p>史上最全的透明度对照表，快上车！</p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-06-13 18:50</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="http://www.tianfeifei.com/tag/java">
-                Java
-                
-                  ，
-                
-              </a>
-            
-              <a href="http://www.tianfeifei.com/tag/tools">
-                工具
-                
-                  ，
-                
-              </a>
-            
-              <a href="http://www.tianfeifei.com/tag/android">
-                Android
-                
-              </a>
-            
-          </span>
-        
-      </div>
+    <div class="site-footer">
+      2019❤Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
     </div>
-    
-      <a href="http://www.tianfeifei.com/post/20190613">
-        <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1560431246402&amp;di=e29106f376874099fbb763967d1639bd&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.jz5u.com%2FSoft%2FUploadPic%2FUpload%2F201512311337107538.jpg')">
-        </div>
-      </a>
-    
-  </section>
+  </div>
+</div>
 
-<section class="post-item">
-    <div class="content">
-      <a href="http://www.tianfeifei.com/post/20190524">
-        <h2 class="post-title">使用fir.im和钉钉进行测试包的发布与管理</h2>
-      </a>
-      <div class="post-abstract">
-        <p>这一星期大部分时间都浪费在和国外同事沟通上了，最后发现是国外同事使用的测试包不一样~<br>
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <h2 class="current-tag">标签: 工具</h2>
+          
+            <article class="post-item">
+              <div class="left">
+                <a href="http://www.tianfeifei.com/post/20190809">
+                  <h2 class="post-title">【禅道】禅道的设计理念（二）</h2>
+                </a>
+                <div class="post-date">
+                  2019-08-09 21:42
+                </div>
+                <div class="post-abstract">
+                  <p>时间就是金钱，敏捷开发才是王道！</p>
+
+                </div>
+              </div>
+              
+            </article>
+          
+            <article class="post-item">
+              <div class="left">
+                <a href="http://www.tianfeifei.com/post/20190808">
+                  <h2 class="post-title">【禅道】禅道的基本使用（开篇）</h2>
+                </a>
+                <div class="post-date">
+                  2019-08-08 21:09
+                </div>
+                <div class="post-abstract">
+                  <p>不得不说，禅道是一个专业的项目研发管理软件。</p>
+
+                </div>
+              </div>
+              
+                <a class="right" href="http://www.tianfeifei.com/post/20190808">
+                  <div class="feature-container" style="background-image: url('https://www.zentao.net/file.php?f=source/default/wide/zen-banner1.jpg&amp;t=jpg&amp;o=source&amp;s=&amp;v=1564714901')">
+                  </div>
+                </a>
+              
+            </article>
+          
+            <article class="post-item">
+              <div class="left">
+                <a href="http://www.tianfeifei.com/post/20190613">
+                  <h2 class="post-title">颜色透明度16进制对照表</h2>
+                </a>
+                <div class="post-date">
+                  2019-06-13 18:50
+                </div>
+                <div class="post-abstract">
+                  <p>史上最全的透明度对照表，快上车！</p>
+
+                </div>
+              </div>
+              
+                <a class="right" href="http://www.tianfeifei.com/post/20190613">
+                  <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1560431246402&amp;di=e29106f376874099fbb763967d1639bd&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.jz5u.com%2FSoft%2FUploadPic%2FUpload%2F201512311337107538.jpg')">
+                  </div>
+                </a>
+              
+            </article>
+          
+            <article class="post-item">
+              <div class="left">
+                <a href="http://www.tianfeifei.com/post/20190524">
+                  <h2 class="post-title">使用fir.im和钉钉进行测试包的发布与管理</h2>
+                </a>
+                <div class="post-date">
+                  2019-05-24 18:00
+                </div>
+                <div class="post-abstract">
+                  <p>这一星期大部分时间都浪费在和国外同事沟通上了，最后发现是国外同事使用的测试包不一样~<br>
 无语死了，为避免重蹈覆辙，在项目组中对测试流程进行了优化和规范，以减少沟通成本。</p>
 
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-05-24 18:00</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="http://www.tianfeifei.com/tag/tools">
-                工具
-                
-                  ，
-                
-              </a>
-            
-              <a href="http://www.tianfeifei.com/tag/android">
-                Android
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="http://www.tianfeifei.com/post/20190524">
-        <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20190524.jpg')">
-        </div>
-      </a>
-    
-  </section>
+                </div>
+              </div>
+              
+                <a class="right" href="http://www.tianfeifei.com/post/20190524">
+                  <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20190524.jpg')">
+                  </div>
+                </a>
+              
+            </article>
+          
+            <article class="post-item">
+              <div class="left">
+                <a href="http://www.tianfeifei.com/post/20190513">
+                  <h2 class="post-title">【自己造轮子】发布远程依赖库之jitpack.io</h2>
+                </a>
+                <div class="post-date">
+                  2019-05-13 10:00
+                </div>
+                <div class="post-abstract">
+                  <p>在gradle的加持下，使用第三方开源库的时候只需要在<code>build.gradle</code>中引用依赖就可以了。那我们想把自己写的库也按照这种便捷的方式让别人使用该怎么办呢？今天就为你揭晓答案！</p>
 
-<section class="post-item">
-    <div class="content">
-      <a href="http://www.tianfeifei.com/post/20190513">
-        <h2 class="post-title">【自己造轮子】发布远程依赖库之jitpack.io</h2>
-      </a>
-      <div class="post-abstract">
-        <p>在gradle的加持下，使用第三方开源库的时候只需要在<code>build.gradle</code>中引用依赖就可以了。那我们想把自己写的库也按照这种便捷的方式让别人使用该怎么办呢？今天就为你揭晓答案！</p>
+                </div>
+              </div>
+              
+                <a class="right" href="http://www.tianfeifei.com/post/20190513">
+                  <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20190513.png')">
+                  </div>
+                </a>
+              
+            </article>
+          
+            <article class="post-item">
+              <div class="left">
+                <a href="http://www.tianfeifei.com/post/20190509">
+                  <h2 class="post-title">Android常用开源控件合集【持续更新】</h2>
+                </a>
+                <div class="post-date">
+                  2019-05-09 06:06
+                </div>
+                <div class="post-abstract">
+                  <p><strong>Github</strong>是一个无穷的宝藏之地，里面有大量优秀的开源项目。这里收集了我从事Android开发工作以来使用到的优秀的开源项目，方便以后查找使用。</p>
 
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-05-13 10:00</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="http://www.tianfeifei.com/tag/tools">
-                工具
-                
-                  ，
-                
-              </a>
-            
-              <a href="http://www.tianfeifei.com/tag/android">
-                Android
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="http://www.tianfeifei.com/post/20190513">
-        <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20190513.png')">
-        </div>
-      </a>
-    
-  </section>
+                </div>
+              </div>
+              
+                <a class="right" href="http://www.tianfeifei.com/post/20190509">
+                  <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20190509.png')">
+                  </div>
+                </a>
+              
+            </article>
+          
 
-<section class="post-item">
-    <div class="content">
-      <a href="http://www.tianfeifei.com/post/20190509">
-        <h2 class="post-title">Android常用开源控件合集【持续更新】</h2>
-      </a>
-      <div class="post-abstract">
-        <p><strong>Github</strong>是一个无穷的宝藏之地，里面有大量优秀的开源项目。这里收集了我从事Android开发工作以来使用到的优秀的开源项目，方便以后查找使用。</p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-05-09 06:06</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="http://www.tianfeifei.com/tag/tools">
-                工具
-                
-                  ，
-                
-              </a>
-            
-              <a href="http://www.tianfeifei.com/tag/android">
-                Android
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="http://www.tianfeifei.com/post/20190509">
-        <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20190509.png')">
-        </div>
-      </a>
-    
-  </section>
-
-
-<div class="pagination-container">
+          <div class="pagination-container">
   
   
 </div>
 
-
+        </div>
       </div>
-
-      <div class="site-footer">
-  <div class="slogan">梦开始的地方</div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  2019❤Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-</div>
-
-
     </div>
-    <script type="application/javascript">
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
 
 hljs.initHighlightingOnLoad()
 

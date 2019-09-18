@@ -1,18 +1,15 @@
-
 <!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
+    <meta charset="utf-8" >
 
 <title>约束布局指北 | 非哥说</title>
 <meta name="description" content="梦开始的地方">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="http://www.tianfeifei.com/favicon.ico?v=1568767943049">
+<link rel="shortcut icon" href="http://www.tianfeifei.com/favicon.ico?v=1568769188018">
 <link rel="stylesheet" href="http://www.tianfeifei.com/styles/main.css">
 
 
@@ -26,91 +23,94 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
 
 
   </head>
   <body>
     <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="http://www.tianfeifei.com">
-        <img class="avatar" src="http://www.tianfeifei.com/images/avatar.png?v=1568767943049" alt="" width="32px" height="32px">
-      </a>
-      <a href="http://www.tianfeifei.com">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="http://www.tianfeifei.com">
+        <img src="http://www.tianfeifei.com/images/avatar.png?v=1568769188018" class="site-logo">
         <h1 class="site-title">非哥说</h1>
       </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
     </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
-  </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
+    <div>
       
         
-          <a href="http://www.tianfeifei.com" class="menu purple-link">
+          <a href="http://www.tianfeifei.com" class="site-nav">
             首页
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/archives" class="menu purple-link">
+          <a href="http://www.tianfeifei.com/archives" class="site-nav">
             归档
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/tags" class="menu purple-link">
+          <a href="http://www.tianfeifei.com/tags" class="site-nav">
             标签
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/post/about/" class="menu purple-link">
+          <a href="http://www.tianfeifei.com/post/about/" class="site-nav">
             关于
           </a>
         
       
         
-          <a class="menu purple-link" href="http://so.tianfeifei.com" class="menu" target="_blank">
+          <a href="http://so.tianfeifei.com" class="site-nav" target="_blank">
             导航
           </a>
         
       
     </div>
   </div>
-</transition>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      梦开始的地方
+    </div>
+    <div class="site-footer">
+      2019❤Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+  </div>
+</div>
 
 
-      <div class="content-container">
-        <div class="post-detail">
-          
-            <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20190828.png')">
-            </div>
-          
-          <h2 class="post-title">约束布局指北</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-08-28 12:03</span>
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">约束布局指北</h2>
+            <div class="post-date">2019-08-28 12:03</div>
             
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="http://www.tianfeifei.com/tag/android">
-                    Android
-                    
-                  </a>
-                
-              </span>
+              <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20190828.png')">
+              </div>
             
-          </div>
-          <div class="post-content">
-            <p>灵魂画手的摩托车！</p>
+            <div class="post-content">
+              <p>灵魂画手的摩托车！</p>
 <!-- more -->
 <p>在开始之前先抛出一个常见的面试题：</p>
 <blockquote>
@@ -376,49 +376,46 @@ Guideline可以通过orientation设置水平方向或者垂直方向的参考线
 在2.0.0中新增了一些特性。以后会添加进来的。<br>
 详细信息请到<a href="https://developer.android.google.cn/reference/android/support/constraint/ConstraintLayout">官网</a>学习查看。</p>
 
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="http://www.tianfeifei.com/tag/android" class="tag">
+                    Android
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="http://www.tianfeifei.com/post/20190809">
+                  <h3 class="post-title">
+                    【禅道】禅道的设计理念（二）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
           </div>
+
         </div>
-
-        
-          <div class="next-post">
-            <a class="purple-link" href="http://www.tianfeifei.com/post/20190809">
-              <h3 class="post-title">
-                下一篇：【禅道】禅道的设计理念（二）
-              </h3>
-            </a>
-          </div>
-          
       </div>
-
-      
-        
-          <div id="gitalk-container"></div>
-        
-
-        
-      
-
-      <div class="site-footer">
-  <div class="slogan">梦开始的地方</div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  2019❤Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-</div>
-
-
     </div>
-    <script type="application/javascript">
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
 
 hljs.initHighlightingOnLoad()
 
