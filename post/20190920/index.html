@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Android四大组件之Activity | 非哥说</title>
+<meta name="description" content="梦开始的地方">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="http://www.tianfeifei.com/favicon.ico?v=1568972652803">
+<link rel="stylesheet" href="http://www.tianfeifei.com/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://www.tianfeifei.com">
+        <img class="avatar" src="http://www.tianfeifei.com/images/avatar.png?v=1568972652803" alt="" width="32px" height="32px">
+      </a>
+      <a href="http://www.tianfeifei.com">
+        <h1 class="site-title">非哥说</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="http://www.tianfeifei.com" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="http://www.tianfeifei.com/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="http://www.tianfeifei.com/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="http://www.tianfeifei.com/post/about/" class="menu purple-link">
+            关于
+          </a>
+        
+      
+        
+          <a class="menu purple-link" href="http://so.tianfeifei.com" class="menu" target="_blank">
+            导航
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Android四大组件之Activity</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-09-20 16:45</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="http://www.tianfeifei.com/tag/android">
+                    Android
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>Activity作为Android的四大组件之一，Activity在Android系统中是以界面的形式进行体现。<br>
+本文简单记录一下Activity的生命周期和启动模式。</p>
+<!-- more -->
+<h1 id="activity的生命周期">Activity的生命周期</h1>
+<p>经典的Activity生命周期图<br>
+<img src="http://www.tianfeifei.com/post-images/1568969444702.png" alt=""></p>
+<ul>
+<li><strong>onCreate()：</strong> 当 Activity 第一次创建时会被调用。这是生命周期的第一个方法。在这个方法中，可以做一些初始化工作，比如调用setContentView去加载界面布局资源，初始化Activity所需的数据。当然也可借助onCreate()方法中的Bundle对象来回复异常情况下Activity结束时的状态（后面会介绍）。</li>
+<li><strong>onRestart()：</strong> 表示Activity正在重新启动。一般情况下，当当前Activity从不可见重新变为可见状态时，onRestart就会被调用。这种情形一般是用户行为导致的，比如用户按Home键切换到桌面或打开了另一个新的Activity，接着用户又回到了这个Actvity。（关于这部分生命周期的历经过程，后面会介绍。）</li>
+<li><strong>onStart()：</strong> 表示Activity正在被启动，即将开始，这时Activity已经出现了，但是还没有出现在前台，无法与用户交互。这个时候可以理解为Activity已经显示出来，但是我们还看不到。</li>
+<li><strong>onResume()：</strong> 表示Activity已经可见了，并且出现在前台并开始活动。需要和onStart()对比，onStart的时候Activity还在后台，onResume的时候Activity才显示到前台。</li>
+<li><strong>onPause()：</strong> 表示 Activity正在停止，仍可见，正常情况下，紧接着onStop就会被调用。在特殊情况下，如果这个时候快速地回到当前Activity，那么onResume就会被调用（极端情况）。onPause中不能进行耗时操作，会影响到新Activity的显示。因为onPause必须执行完，新的Activity的onResume才会执行。</li>
+<li><strong>onStop()：</strong> 表示Activity即将停止，不可见，位于后台。可以做稍微重量级的回收工作，同样不能太耗时。</li>
+<li><strong>onDestory()：</strong> 表示Activity即将销毁，这是Activity生命周期的最后一个回调，可以做一些回收工作和最终的资源回收。</li>
+</ul>
+<h2 id="正常的生命周期">正常的生命周期</h2>
+<h3 id="一个activity从启动到结束的生命周期">一个Activity从启动到结束的生命周期</h3>
+<blockquote>
+<p>onCreate()-&gt;onStart()-&gt;onResume()-&gt;onPause()-&gt;onStop()-&gt;onDestory()</p>
+</blockquote>
+<h3 id="常见的生命周期情景">常见的生命周期情景</h3>
+<ul>
+<li>当我们看新闻时，出现电话、信息等通知，此时activity不会调用生命周期的方法，只有你点击通知跳转到其他activity时，才会调用<code>onPause()</code>&gt;<code>onStop()</code>方法。</li>
+<li>当我们按Home键切换到桌面后又回到该Actitivy，回调如下：<code>onPause()</code>&gt;<code>onStop()</code>&gt;<code>onRestart()</code>&gt;<code>onStart()</code>&gt;<code>onResume()</code></li>
+<li>当我们按back键回退时，回调如下：<code>onPause()</code>&gt;<code>onStop()</code>&gt;<code>onDestory()</code></li>
+<li>在生命周期方法中调用finish()时，activity的生命周期与调用finish()的位置有关（调用完finish()后,不会直接退出该生命周期的方法，而是先执行完所在的生命周期方法）：</li>
+</ul>
+<blockquote>
+<p>在<strong>onCreate()</strong> 中调用时，先执行完onCreate(),回调为onDestory()<br>
+在<strong>onStart()</strong> 中调用时，回调为：onStop()-&gt;onDestory()<br>
+在<strong>onResume()</strong> 中执行时，回调为:onPause()-&gt;onStop()-&gt;onDestory()<br>
+在<strong>onPause()</strong> 中执行时，回调为:onStop()-&gt;onDestory()<br>
+在<strong>onStop()</strong> 中调用时，回调为：onDestory()</p>
+</blockquote>
+<h2 id="特殊情况下的生命周期">特殊情况下的生命周期</h2>
+<h3 id="横竖屏切换">横竖屏切换</h3>
+<p>在横竖屏切换的过程中，会发生Activity被销毁并重建的过程。</p>
+<blockquote>
+<p>onPause()-&gt;onSaveInstanceState()-&gt; onStop()-&gt;onDestroy()-&gt;onCreate()-&gt;onStart()-&gt;onRestoreInstanceState()-&gt;onResume()</p>
+</blockquote>
+<p>在Activity由于异常情况下终止时，系统会调用onSaveInstanceState来保存当前Activity的状态。这个方法的调用是在onStop之前，它和onPause没有既定的时序关系，该方法只在Activity被异常终止的情况下调用。当异常终止的Activity被重建以后，系统会调用onRestoreInstanceState，并且把Activity销毁时onSaveInstanceState方法所保存的Bundle对象参数同时传递给onRestoreInstanceState和onCreate方法。因此，可以通过onRestoreInstanceState方法来恢复Activity的状态，该方法的调用时机是在onStart之后。其中onCreate和onRestoreInstanceState方法来恢复Activity的状态的区别： onRestoreInstanceState回调则表明其中Bundle对象非空，不用加非空判断。onCreate需要非空判断。建议使用onRestoreInstanceState。</p>
+<p>可以通过在AndroidManifest文件的Activity中指定如下属性：</p>
+<pre><code>android:configChanges = &quot;orientation| screenSize&quot;
+</code></pre>
+<p>来避免横竖屏切换时，Activity的销毁和重建。<br>
+这个时候回调了<code>onConfigurationChanged()</code>方法。</p>
+<h3 id="资源内存不足导致优先级低的activity被杀死">资源内存不足导致优先级低的Activity被杀死</h3>
+<p>Activity优先级的划分和下面的Activity的三种运行状态是对应的。</p>
+<ul>
+<li>前台Activity——正在和用户交互的Activity，优先级最高。</li>
+<li>可见但非前台Activity——比如Activity中弹出了一个对话框，导致Activity可见但是位于后台无法和用户交互。</li>
+<li>后台Activity——已经被暂停的Activity，比如执行了onStop，优先级最低。<br>
+当系统内存不足时，会按照上述优先级从低到高去杀死目标Activity所在的进程。我们在平常使用手机时，能经常感受到这一现象。这种情况下数组存储和恢复过程和上述情况一致，生命周期情况也一样。</li>
+</ul>
+<h2 id="activity的三种运行状态">Activity的三种运行状态</h2>
+<h3 id="resumed活动状态">Resumed（活动状态）</h3>
+<p>又叫Running状态，这个Activity正在屏幕上显示，并且有用户焦点。这个很好理解，就是用户正在操作的那个界面。</p>
+<h3 id="paused暂停状态">Paused（暂停状态）</h3>
+<p>这是一个比较不常见的状态。这个Activity在屏幕上是可见的，但是并不是在屏幕最前端的那个Activity。比如有另一个非全屏或者透明的Activity是Resumed状态，没有完全遮盖这个Activity。</p>
+<h3 id="stopped停止状态">Stopped（停止状态）</h3>
+<p>当Activity完全不可见时，此时Activity还在后台运行，仍然在内存中保留Activity的状态，并不是完全销毁。这个也很好理解，当跳转的另外一个界面，之前的界面还在后台，按回退按钮还会恢复原来的状态，大部分软件在打开的时候，直接按Home键，并不会关闭它，此时的Activity就是Stopped状态。</p>
+<h1 id="activity的启动模式">Activity的启动模式</h1>
+<p>Android提供了四种Activity启动方式：</p>
+<ul>
+<li>标准模式（standard）</li>
+<li>栈顶复用模式（singleTop）</li>
+<li>栈内复用模式（singleTask）</li>
+<li>单例模式（singleInstance）</li>
+</ul>
+<h2 id="启动模式的结构">启动模式的结构</h2>
+<p>Activity的管理是采用任务栈的形式，任务栈采用“后进先出”的栈结构。</p>
+<h2 id="任务栈">任务栈</h2>
+<p>Android的任务栈由TaskAffinity指定，TaskAffinity标识了一个Activity所需要的任务栈的名字。默认情况下TaskAffinity为包名。一般我们不改变TaskAffinity的默认值，不同的应用属于不同的任务栈，同一个应用都在同一个任务栈。我们可以通过设置TaskAffinity来让同一应用中的不同的Activity属于不同的任务栈。<br>
+前台任务栈和后台任务栈的区别：前台任务栈和后台任务栈都是任务栈，不同的是前台任务栈中存在Activity与为用户所见，而后台的任务栈中的Activity都在后台</p>
+<h2 id="launchmode">LaunchMode</h2>
+<h3 id="标准模式standard">标准模式（standard）</h3>
+<ul>
+<li>每启动一次Activity，就会创建一个新的Activity实例并置于栈顶。谁启动了这个Activity，那么这个Activity就运行在启动它的那个Activity所在的栈中。</li>
+</ul>
+<blockquote>
+<p><strong>应用场景：</strong> 绝大多数Activity。</p>
+</blockquote>
+<h3 id="栈顶复用模式singletop">栈顶复用模式（singleTop）</h3>
+<ul>
+<li>如果需要新建的Activity位于任务栈栈顶，那么此Activity的实例就不会重建，而是重用栈顶的实例。并回调<code>onNewIntent()</code>方法。</li>
+</ul>
+<blockquote>
+<p><strong>应用场景：</strong> 在通知栏点击收到的通知，然后需要启动一个Activity，这个Activity就可以用singleTop，否则每次点击都会新建一个Activity。</p>
+</blockquote>
+<h3 id="栈内复用模式singletask">栈内复用模式（singleTask）</h3>
+<ul>
+<li>该模式是一种单例模式，即一个栈内只有一个该Activity实例。该模式，可以通过在AndroidManifest文件的Activity中指定该Activity需要加载到那个栈中，即singleTask的Activity可以指定想要加载的目标栈。singleTask和taskAffinity配合使用，指定开启的Activity加入到哪个栈中。</li>
+</ul>
+<blockquote>
+<p><strong>应用场景：</strong>  大多数App的主页。</p>
+</blockquote>
+<h3 id="单例模式singleinstance">单例模式（singleInstance）</h3>
+<ul>
+<li>作为栈内复用模式（singleTask）的加强版,打开该Activity时，直接创建一个新的任务栈，并创建该Activity实例放入新栈中。一旦该模式的Activity实例已经存在于某个栈中，任何应用再激活该Activity时都会重用该栈中的实例。</li>
+</ul>
+<blockquote>
+<p><strong>应用场景：</strong>   呼叫来电界面。这种模式的使用情况比较罕见，在Launcher中可能使用。或者你确定你需要使Activity只有一个实例。建议谨慎使用。</p>
+</blockquote>
+<h2 id="前台栈和后台栈的交互">前台栈和后台栈的交互</h2>
+<p>假如目前有两个任务栈。前台任务栈为AB，后台任务栈为CD，这里假设CD的启动模式均为singleTask,<br>
+现在请求启动D，那么这个后台的任务栈都会被切换到前台，这个时候整个后退列表就变成了ABCD。当用户按back返回时，列表中的activity会一一出栈，如下图。<br>
+<img src="http://www.tianfeifei.com/post-images/1568972339850.png" alt=""><br>
+如果不是请求启动D而是启动C，那么情况又不一样，如下图。<br>
+<img src="http://www.tianfeifei.com/post-images/1568972382096.png" alt=""><br>
+<strong>调用SingleTask模式的后台任务栈中的Activity，会把整个栈的Actvity压入当前栈的栈顶。singleTask会具有clearTop特性，把之上的栈内Activity清除。</strong></p>
+<h2 id="activity的flags">Activity的Flags</h2>
+<p>Activity的Flags很多，这里介绍集中常用的，用于设定Activity的启动模式。可以在启动Activity时，通过Intent的addFlags()方法设置。</p>
+<ul>
+<li>FLAG_ACTIVITY_NEW_TASK 其效果与指定Activity为singleTask模式一致。</li>
+<li>FLAG_ACTIVITY_SINGLE_TOP 其效果与指定Activity为singleTop模式一致。</li>
+<li>FLAG_ACTIVITY_CLEAR_TOP 具有此标记位的Activity，当它启动时，在同一个任务栈中所有位于它上面的Activity都要出栈。如果和singleTask模式一起出现，若被启动的Activity已经存在栈中，则清除其之上的Activity，并调用该Activity的onNewIntent方法。如果被启动的Activity采用standard模式，那么该Activity连同之上的所有Activity出栈，然后创建新的Activity实例并压入栈中。</li>
+</ul>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="http://www.tianfeifei.com/post/20190828">
+              <h3 class="post-title">
+                下一篇：约束布局指北
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">梦开始的地方</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  2019❤Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'd0c4a5c1ab6ea3db037a',
+        clientSecret: 'a43e84ad9fa25f009243e2305fb8230e4fb6bb6b',
+        repo: 'androidflying.github.io',
+        owner: 'androidflying',
+        admin: ['androidflying'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
