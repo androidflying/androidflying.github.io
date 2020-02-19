@@ -2,14 +2,25 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://www.tianfeifei.com</id>
     <title>非哥说</title>
-    <updated>2019-09-20T09:44:15.545Z</updated>
+    <updated>2020-02-19T14:15:31.593Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://www.tianfeifei.com"/>
     <link rel="self" href="http://www.tianfeifei.com/atom.xml"/>
     <subtitle>梦开始的地方</subtitle>
     <logo>http://www.tianfeifei.com/images/avatar.png</logo>
     <icon>http://www.tianfeifei.com/favicon.ico</icon>
-    <rights>All rights reserved 2019, 非哥说</rights>
+    <rights>All rights reserved 2020, 非哥说</rights>
+    <entry>
+        <title type="html"><![CDATA[【Java基础】由多选弹窗引起的一些思考(浅拷贝和深拷贝)]]></title>
+        <id>http://www.tianfeifei.com/post/20200219</id>
+        <link href="http://www.tianfeifei.com/post/20200219">
+        </link>
+        <updated>2020-02-19T12:01:49.000Z</updated>
+        <summary type="html"><![CDATA[<p>最近在封装常见的UI组件，看似简单的功能也会有可以思考的东西。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>最近在封装常见的UI组件，看似简单的功能也会有可以思考的东西。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Android四大组件之Activity]]></title>
         <id>http://www.tianfeifei.com/post/20190920</id>
@@ -111,17 +122,6 @@
         <summary type="html"><![CDATA[<p>本篇收录日常Android开发中遇到的问题以及解决思路。</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>本篇收录日常Android开发中遇到的问题以及解决思路。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[架构设计(一)]]></title>
-        <id>http://www.tianfeifei.com/post/20190507</id>
-        <link href="http://www.tianfeifei.com/post/20190507">
-        </link>
-        <updated>2019-05-07T12:30:30.000Z</updated>
-        <summary type="html"><![CDATA[<p>优秀的APP诞生，除了引人入胜的交互效果和业务逻辑，还有来自开发的鼎力支持。就像建造房子一样，拥有了优秀的设计图纸，还需要开发商对图纸进行实现。</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>优秀的APP诞生，除了引人入胜的交互效果和业务逻辑，还有来自开发的鼎力支持。就像建造房子一样，拥有了优秀的设计图纸，还需要开发商对图纸进行实现。</p>
 ]]></content>
     </entry>
 </feed>

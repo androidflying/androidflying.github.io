@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>【Java基础】由多选弹窗引起的一些思考(浅拷贝和深拷贝) | 非哥说</title>
+<meta name="description" content="梦开始的地方">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="http://www.tianfeifei.com/favicon.ico?v=1582121727152">
+<link rel="stylesheet" href="http://www.tianfeifei.com/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://www.tianfeifei.com">
+        <img class="avatar" src="http://www.tianfeifei.com/images/avatar.png?v=1582121727152" alt="" width="32px" height="32px">
+      </a>
+      <a href="http://www.tianfeifei.com">
+        <h1 class="site-title">非哥说</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="http://www.tianfeifei.com" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="http://www.tianfeifei.com/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="http://www.tianfeifei.com/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="http://www.tianfeifei.com/post/about/" class="menu purple-link">
+            关于
+          </a>
+        
+      
+        
+          <a class="menu purple-link" href="http://so.tianfeifei.com" class="menu" target="_blank">
+            导航
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+            <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20200219.png')">
+            </div>
+          
+          <h2 class="post-title">【Java基础】由多选弹窗引起的一些思考(浅拷贝和深拷贝)</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-02-19 20:01</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="http://www.tianfeifei.com/tag/java">
+                    Java
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="http://www.tianfeifei.com/tag/bug">
+                    Bug
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="http://www.tianfeifei.com/tag/android">
+                    Android
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>最近在封装常见的UI组件，看似简单的功能也会有可以思考的东西。</p>
+<!-- more -->
+<h1 id="背景">背景：</h1>
+<p>单选和多选是开发App中经常用到的功能，系统自带的选择框使用起来有很大的局限性。<br>
+理想状态是把选项数据传给选择框，然后选择框把选择的数据返回回来。<br>
+具体的代码不在这里细讲了，遇见的问题就是，把数据传过去的时候，点击取消按钮，再打开的时候，选项的状态保存下来了。如图所示：<br>
+<img src="http://www.tianfeifei.com/post-images/1582116503148.gif" alt="" loading="lazy"><br>
+可以看到，在点击取消按钮再进来的时候，不应该对上次的操作进行保存。</p>
+<h1 id="解决思路">解决思路</h1>
+<p>我们该怎么做呢？<br>
+添加一层缓存，把初始状态缓存起来，点击取消按钮的时候，把初始状态赋值给选项，假装还原回去。<br>
+伪代码如下</p>
+<pre><code>public class MenuDialog&lt;T extends AbsKV&gt; extends BasePopupWindow {
+     //.....省略部分代码
+
+    private MenuDialog(Context context) {
+        super(context);
+    }
+
+    public MenuDialog(Context context, Builder builder) {
+        this(context);
+       //.....省略部分代码
+        tvDialogCancel.setOnClickListener(v -&gt; {
+            builder.items.clear();
+            builder.items.addAll(builder.temps);
+            dismiss();
+        });
+        //.....省略部分代码
+    }
+
+    //.....省略部分代码
+
+    public static class Builder&lt;T extends AbsKV&gt; {
+         //.....省略部分代码
+        private List&lt;T&gt; items;
+        private List&lt;T&gt; temps = new ArrayList&lt;&gt;();
+       //.....省略部分代码
+        public Builder(Context context) {
+            this.context = context;
+        }
+
+        //.....省略部分代码
+
+        public Builder setItems(List&lt;T&gt; datas) {
+            this.items = datas;
+            temps.addAll(datas);
+            return this;
+        }
+
+        //.....省略部分代码
+
+        public MenuDialog build() {
+            return new MenuDialog(context, this);
+        }
+    }
+
+    //.....省略部分代码
+
+}
+
+</code></pre>
+<p>好了，问题解决！run一下我们可以继续摸鱼了<br>
+<img src="http://www.tianfeifei.com/post-images/1582116503148.gif" alt="" loading="lazy"><br>
+纳尼？怎么不对？<br>
+我们看一下断点：<br>
+<img src="http://www.tianfeifei.com/post-images/1582117841338.png" alt="" loading="lazy"></p>
+<p>虽然我们对数据源进行了缓存，也确实存在一个缓存源。但是，缓存源里的元素指向的是同一个内存地址，这样的话，我们对数据源进行修改的时候，缓存源里的元素也会进行改变。<br>
+这是什么现象？</p>
+<h1 id="原理解析">原理解析</h1>
+<p>这里是java基础中的数据类型，我们来认真复习一下</p>
+<blockquote>
+<p>Java 中的数据类型分为基本数据类型和引用数据类型。对于这两种数据类型，在进行赋值操作、用作方法参数或返回值时，会有值传递和引用（地址）传递的差别。</p>
+</blockquote>
+<figure data-type="image" tabindex="1"><img src="http://www.tianfeifei.com/post-images/1582118740873.png" alt="" loading="lazy"></figure>
+<p><strong>那么在拷贝的时候会是什么样子呢？</strong></p>
+<p>根据对对象属性的拷贝程度（基本数据类和引用类型），会分为两种：<br>
+* 浅拷贝 (Shallow Copy)<br>
+* 深拷贝 (Deep Copy)</p>
+<h2 id="浅拷贝">浅拷贝</h2>
+<blockquote>
+<p>浅拷贝是按位拷贝对象，它会创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值；如果属性是内存地址（引用类型），拷贝的就是内存地址 ，因此如果其中一个对象改变了这个地址，就会影响到另一个对象。即默认拷贝构造函数只是对对象进行浅拷贝复制(逐个成员依次拷贝)，即只复制对象空间而不复制资源。</p>
+</blockquote>
+<h2 id="深拷贝">深拷贝</h2>
+<blockquote>
+<p>深拷贝，在拷贝引用类型成员变量时，为引用类型的数据成员另辟了一个独立的内存空间，实现真正内容上的拷贝。</p>
+</blockquote>
+<p>我们出现如上问题的原因是因为，AbsKV的数据类型是引用类型，我们在进行复制的时候，只是把数据源的内存地址给拷贝到缓存源中了，所以再修改数据源的时候也修改了缓存源。</p>
+<h1 id="解决方案">解决方案</h1>
+<p>我们已经知道问题出在哪了，那么就容易解决了。就是对引用类型的数据进行深拷贝。<br>
+代码如下：</p>
+<pre><code>public abstract class AbsKV implements Cloneable {
+
+    private boolean isChoice = false;
+
+    protected abstract String getKey();
+
+    protected abstract String getValue();
+
+    void setChoice(boolean isChoice) {
+        this.isChoice = isChoice;
+    }
+
+    boolean getChoice() {
+        return isChoice;
+    }
+
+    @NonNull
+    @Override
+    protected Object clone() {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
+    }
+
+}
+</code></pre>
+<p>同时在生成缓存源的时候，使用<code>clone()</code>方法：<br>
+修改代码如下：</p>
+<pre><code>         //.....省略部分代码
+        public Builder setItems(List&lt;T&gt; datas) {
+            this.items = datas;
+            //temps.addAll(datas);
+            for (T t : datas) {
+                temps.add((T) t.clone());
+            }
+            return this;
+        }
+        //.....省略部分代码
+
+</code></pre>
+<p>到这里我们的问题就解决了，run一下下班！！！<br>
+<img src="http://www.tianfeifei.com/post-images/1582119686869.gif" alt="" loading="lazy"></p>
+<h1 id="参考资料">参考资料</h1>
+<ul>
+<li><a href="https://www.cnblogs.com/fangtingfei/p/10369271.html">Java的基本数据类型</a></li>
+<li><a href="https://blog.csdn.net/u014727260/article/details/55003402">浅拷贝和深拷贝(谈谈java中的clone)</a></li>
+</ul>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="http://www.tianfeifei.com/post/20190920">
+              <h3 class="post-title">
+                下一篇：Android四大组件之Activity
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">梦开始的地方</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  2020❤Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'd0c4a5c1ab6ea3db037a',
+        clientSecret: 'a43e84ad9fa25f009243e2305fb8230e4fb6bb6b',
+        repo: 'androidflying.github.io',
+        owner: 'androidflying',
+        admin: ['androidflying'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
