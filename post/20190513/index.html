@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="http://www.tianfeifei.com/favicon.ico?v=1582121727152">
-<link rel="stylesheet" href="http://www.tianfeifei.com/styles/main.css">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1619445404213">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
 
 
   
@@ -34,10 +34,10 @@
       <div class="site-header-container">
   <div class="site-header">
     <div class="left">
-      <a href="http://www.tianfeifei.com">
-        <img class="avatar" src="http://www.tianfeifei.com/images/avatar.png?v=1582121727152" alt="" width="32px" height="32px">
+      <a href="http://localhost:4000">
+        <img class="avatar" src="http://localhost:4000/images/avatar.png?v=1619445404213" alt="" width="32px" height="32px">
       </a>
-      <a href="http://www.tianfeifei.com">
+      <a href="http://localhost:4000">
         <h1 class="site-title">非哥说</h1>
       </a>
     </div>
@@ -54,25 +54,25 @@
     <div class="menu-list">
       
         
-          <a href="http://www.tianfeifei.com" class="menu purple-link">
+          <a href="http://localhost:4000" class="menu purple-link">
             首页
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/archives" class="menu purple-link">
+          <a href="http://localhost:4000/archives" class="menu purple-link">
             归档
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/tags" class="menu purple-link">
+          <a href="http://localhost:4000/tags" class="menu purple-link">
             标签
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/post/about/" class="menu purple-link">
+          <a href="http://localhost:4000/post/about/" class="menu purple-link">
             关于
           </a>
         
@@ -91,7 +91,7 @@
       <div class="content-container">
         <div class="post-detail">
           
-            <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20190513.png')">
+            <div class="feature-container" style="background-image: url('http://localhost:4000/post-images/20190513.png')">
             </div>
           
           <h2 class="post-title">【自己造轮子】发布远程依赖库之jitpack.io</h2>
@@ -101,14 +101,14 @@
               <span>
                 <i class="icon-pricetags-outline"></i>
                 
-                  <a href="http://www.tianfeifei.com/tag/tools">
+                  <a href="http://localhost:4000/tag/tools">
                     工具
                     
                       ，
                     
                   </a>
                 
-                  <a href="http://www.tianfeifei.com/tag/android">
+                  <a href="http://localhost:4000/tag/android">
                     Android
                     
                   </a>
@@ -125,10 +125,10 @@
 <h1 id="开始造轮子">开始造轮子</h1>
 <h2 id="以开源库名称新建一个项目">以开源库名称新建一个项目。</h2>
 <p>例如<br>
-<img src="http://www.tianfeifei.com/post-images/1557742011201.png" alt="" loading="lazy"></p>
+<img src="http://localhost:4000/post-images/1557742011201.png" alt="" loading="lazy"></p>
 <h2 id="然后新建或者引入library">然后新建或者引入Library</h2>
 <p>例如<br>
-<img src="http://www.tianfeifei.com/post-images/1557742157463.png" alt="" loading="lazy"></p>
+<img src="http://localhost:4000/post-images/1557742157463.png" alt="" loading="lazy"></p>
 <h2 id="在根目录的buildgradle文件中加入插件">在根目录的build.gradle文件中加入插件</h2>
 <pre><code>buildscript {
 ...
@@ -148,19 +148,19 @@ group='com.github.ithomasoft'
 <p>下面这一句是:group='com.github.你的github昵称'</p>
 </blockquote>
 <h2 id="将项目提交到github上">将项目提交到github上</h2>
-<figure data-type="image" tabindex="1"><img src="http://www.tianfeifei.com/post-images/1557797004276.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1557797004276.png" alt="" loading="lazy"></figure>
 <h2 id="在github上对上传的项目创建一个releases版本">在github上对上传的项目创建一个releases版本</h2>
-<figure data-type="image" tabindex="2"><img src="http://www.tianfeifei.com/post-images/1557797333602.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="http://localhost:4000/post-images/1557797333602.png" alt="" loading="lazy"></figure>
 <blockquote>
 <p>注意，这里填写的就是引用依赖库时候的版本号，可以不加“v”</p>
 </blockquote>
 <p>到这里轮子就造好了</p>
 <h1 id="装车">装车</h1>
 <h2 id="打开jitpackio并使用github注册登录">打开<a href="https://jitpack.io">jitpack.io</a>，并使用Github注册登录。</h2>
-<figure data-type="image" tabindex="3"><img src="http://www.tianfeifei.com/post-images/1557797634673.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="http://localhost:4000/post-images/1557797634673.png" alt="" loading="lazy"></figure>
 <blockquote>
 <p>输入你的GitHub昵称/你开源库的名称,然后点Look up按钮。<br>
-<img src="http://www.tianfeifei.com/post-images/1557797809194.png" alt="" loading="lazy"><br>
+<img src="http://localhost:4000/post-images/1557797809194.png" alt="" loading="lazy"><br>
 当你看到有你创建的release，并且Log图标为绿时，说明创建成功。</p>
 </blockquote>
 <h1 id="开车">开车</h1>
@@ -179,7 +179,7 @@ group='com.github.ithomasoft'
 </code></pre>
 <h2 id="同步项目">同步项目</h2>
 <p>rebuild一下项目，就可以使用了<br>
-<img src="http://www.tianfeifei.com/post-images/1557798403769.png" alt="" loading="lazy"></p>
+<img src="http://localhost:4000/post-images/1557798403769.png" alt="" loading="lazy"></p>
 <blockquote>
 <p>可以看到我们已经引用成功。</p>
 </blockquote>
@@ -195,7 +195,7 @@ group='com.github.ithomasoft'
 
         
           <div class="next-post">
-            <a class="purple-link" href="http://www.tianfeifei.com/post/20190509">
+            <a class="purple-link" href="http://localhost:4000/post/20190509">
               <h3 class="post-title">
                 下一篇：Android常用开源控件合集【持续更新】
               </h3>

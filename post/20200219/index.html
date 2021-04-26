@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="http://www.tianfeifei.com/favicon.ico?v=1582121727152">
-<link rel="stylesheet" href="http://www.tianfeifei.com/styles/main.css">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1619445404213">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
 
 
   
@@ -34,10 +34,10 @@
       <div class="site-header-container">
   <div class="site-header">
     <div class="left">
-      <a href="http://www.tianfeifei.com">
-        <img class="avatar" src="http://www.tianfeifei.com/images/avatar.png?v=1582121727152" alt="" width="32px" height="32px">
+      <a href="http://localhost:4000">
+        <img class="avatar" src="http://localhost:4000/images/avatar.png?v=1619445404213" alt="" width="32px" height="32px">
       </a>
-      <a href="http://www.tianfeifei.com">
+      <a href="http://localhost:4000">
         <h1 class="site-title">非哥说</h1>
       </a>
     </div>
@@ -54,25 +54,25 @@
     <div class="menu-list">
       
         
-          <a href="http://www.tianfeifei.com" class="menu purple-link">
+          <a href="http://localhost:4000" class="menu purple-link">
             首页
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/archives" class="menu purple-link">
+          <a href="http://localhost:4000/archives" class="menu purple-link">
             归档
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/tags" class="menu purple-link">
+          <a href="http://localhost:4000/tags" class="menu purple-link">
             标签
           </a>
         
       
         
-          <a href="http://www.tianfeifei.com/post/about/" class="menu purple-link">
+          <a href="http://localhost:4000/post/about/" class="menu purple-link">
             关于
           </a>
         
@@ -91,7 +91,7 @@
       <div class="content-container">
         <div class="post-detail">
           
-            <div class="feature-container" style="background-image: url('http://www.tianfeifei.com/post-images/20200219.png')">
+            <div class="feature-container" style="background-image: url('http://localhost:4000/post-images/20200219.png')">
             </div>
           
           <h2 class="post-title">【Java基础】由多选弹窗引起的一些思考(浅拷贝和深拷贝)</h2>
@@ -101,21 +101,21 @@
               <span>
                 <i class="icon-pricetags-outline"></i>
                 
-                  <a href="http://www.tianfeifei.com/tag/java">
+                  <a href="http://localhost:4000/tag/java">
                     Java
                     
                       ，
                     
                   </a>
                 
-                  <a href="http://www.tianfeifei.com/tag/bug">
+                  <a href="http://localhost:4000/tag/bug">
                     Bug
                     
                       ，
                     
                   </a>
                 
-                  <a href="http://www.tianfeifei.com/tag/android">
+                  <a href="http://localhost:4000/tag/android">
                     Android
                     
                   </a>
@@ -130,7 +130,7 @@
 <p>单选和多选是开发App中经常用到的功能，系统自带的选择框使用起来有很大的局限性。<br>
 理想状态是把选项数据传给选择框，然后选择框把选择的数据返回回来。<br>
 具体的代码不在这里细讲了，遇见的问题就是，把数据传过去的时候，点击取消按钮，再打开的时候，选项的状态保存下来了。如图所示：<br>
-<img src="http://www.tianfeifei.com/post-images/1582116503148.gif" alt="" loading="lazy"><br>
+<img src="http://localhost:4000/post-images/1582116503148.gif" alt="" loading="lazy"><br>
 可以看到，在点击取消按钮再进来的时候，不应该对上次的操作进行保存。</p>
 <h1 id="解决思路">解决思路</h1>
 <p>我们该怎么做呢？<br>
@@ -186,10 +186,10 @@
 
 </code></pre>
 <p>好了，问题解决！run一下我们可以继续摸鱼了<br>
-<img src="http://www.tianfeifei.com/post-images/1582116503148.gif" alt="" loading="lazy"><br>
+<img src="http://localhost:4000/post-images/1582116503148.gif" alt="" loading="lazy"><br>
 纳尼？怎么不对？<br>
 我们看一下断点：<br>
-<img src="http://www.tianfeifei.com/post-images/1582117841338.png" alt="" loading="lazy"></p>
+<img src="http://localhost:4000/post-images/1582117841338.png" alt="" loading="lazy"></p>
 <p>虽然我们对数据源进行了缓存，也确实存在一个缓存源。但是，缓存源里的元素指向的是同一个内存地址，这样的话，我们对数据源进行修改的时候，缓存源里的元素也会进行改变。<br>
 这是什么现象？</p>
 <h1 id="原理解析">原理解析</h1>
@@ -197,7 +197,7 @@
 <blockquote>
 <p>Java 中的数据类型分为基本数据类型和引用数据类型。对于这两种数据类型，在进行赋值操作、用作方法参数或返回值时，会有值传递和引用（地址）传递的差别。</p>
 </blockquote>
-<figure data-type="image" tabindex="1"><img src="http://www.tianfeifei.com/post-images/1582118740873.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1582118740873.png" alt="" loading="lazy"></figure>
 <p><strong>那么在拷贝的时候会是什么样子呢？</strong></p>
 <p>根据对对象属性的拷贝程度（基本数据类和引用类型），会分为两种：<br>
 * 浅拷贝 (Shallow Copy)<br>
@@ -257,7 +257,7 @@
 
 </code></pre>
 <p>到这里我们的问题就解决了，run一下下班！！！<br>
-<img src="http://www.tianfeifei.com/post-images/1582119686869.gif" alt="" loading="lazy"></p>
+<img src="http://localhost:4000/post-images/1582119686869.gif" alt="" loading="lazy"></p>
 <h1 id="参考资料">参考资料</h1>
 <ul>
 <li><a href="https://www.cnblogs.com/fangtingfei/p/10369271.html">Java的基本数据类型</a></li>
@@ -269,9 +269,9 @@
 
         
           <div class="next-post">
-            <a class="purple-link" href="http://www.tianfeifei.com/post/20190920">
+            <a class="purple-link" href="http://localhost:4000/post/20191104">
               <h3 class="post-title">
-                下一篇：Android四大组件之Activity
+                下一篇：Glide的回调与监听
               </h3>
             </a>
           </div>

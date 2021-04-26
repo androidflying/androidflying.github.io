@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Glide的回调与监听 | 非哥说</title>
+<meta name="description" content="梦开始的地方">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1619445404213">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://localhost:4000">
+        <img class="avatar" src="http://localhost:4000/images/avatar.png?v=1619445404213" alt="" width="32px" height="32px">
+      </a>
+      <a href="http://localhost:4000">
+        <h1 class="site-title">非哥说</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="http://localhost:4000" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="http://localhost:4000/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="http://localhost:4000/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="http://localhost:4000/post/about/" class="menu purple-link">
+            关于
+          </a>
+        
+      
+        
+          <a class="menu purple-link" href="http://so.tianfeifei.com" class="menu" target="_blank">
+            导航
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Glide的回调与监听</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-11-04 14:13</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="http://localhost:4000/tag/android">
+                    Android
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>哪有什么岁月静好，不过是有人替你负重前行。</p>
+<!-- more -->
+<p>Glide能成为主流的图片开源框架，我想上面这句话能很好的概括了吧。<br>
+<code>Glide.with(this).load(url).into(imageView);</code><br>
+以上就完成了图片的加载和现实，非常方便。<br>
+很多时候，我们都停留在这里没有深入，觉得图片加载很简单，一行代码完事；<br>
+深入阅读源码之后才发现Glide替你做了<strong>成吨</strong>的工作（郭霖大神的原话）；<br>
+那今天我们就从源码上去看一下，Glide怎么把图片显示在imageView上的。</p>
+<h2 id="glide加载图片的过程">Glide加载图片的过程</h2>
+<p><img src="http://localhost:4000/post-images/1572850945380.png" alt="" loading="lazy"><br>
+可以看到，在第701行会调用<code>glideContext.buildImageViewTarget(view, transcodeClass)</code>构建出一个Target对象，然后再把这个Target对象传入到另一个into()方法中。我们暂且记住这个Target对象，因为她So Sexy!😏<br>
+好了，我们回到另一个into()方法中：<br>
+<img src="http://localhost:4000/post-images/1572855134027.png" alt="" loading="lazy"><br>
+我们能看到，在第621行的时候构建了一个Request请求，诶，是不是有获取图片的感觉？<br>
+我们来看一下他是怎么构建Request请求的<br>
+---&gt; <code>buildRequest()</code><br>
+---&gt; <code>buildRequestRecursive()</code><br>
+---&gt; <code>buildThumbnailRequestRecursive()</code><br>
+---&gt; <code>obtainRequest()</code><br>
+---&gt; <code>SingleRequest.obtain()</code><br>
+---&gt;  <code>new SingleRequest()</code><br>
+实际上，所有的构建请求都指向了SingleRequest类。可以看到SingleRequest类中的方法名与请求的状态有关。同时都有一个target存在，那这个target是上面那个So Sexy的Target对象吗？<br>
+我们从下往上看去，发现SingleRequest类中使用的target就是我们最开始构建的Target对象。<br>
+下面呢，我们去看看这个So Sexy的Target对象<br>
+<img src="http://localhost:4000/post-images/1572857867066.png" alt="" loading="lazy"><br>
+我们发现，这个Target对象是工厂生产的（工厂模式）。<br>
+最后，在Target工厂的DrawableImage产品(DrawableImageViewTarget)中调用了<code>ImageView.setImageDrawable()</code><br>
+到此，Glide加载并显示图片的过程就完成了。</p>
+<h2 id="preload方法">preload()方法</h2>
+<p>通过名字我们可以看到这个是预加载方法，能够加快图片的显示速度。<br>
+那预加载的原理是什么呢？是不是也是加载图片的方法，但是不显示在控件上？<br>
+好了，我们来看一下源码来验证一下我们的猜想：<br>
+<img src="http://localhost:4000/post-images/1573025817109.png" alt="" loading="lazy"><br>
+巧了，他最后还是调用了into()方法，只是传入了一个特殊的Target对象。<br>
+我们来看一下这个Target对象中是怎么样的<br>
+<img src="http://localhost:4000/post-images/1573026004174.png" alt="" loading="lazy"><br>
+可以看到，他在onResourceReady()方法中什么也没做，只是重置了requestManager。</p>
+<p>需要注意的是，如果使用了preload()方法，最好将diskCacheStrategy的缓存策略指定为DiskCacheStrategy.SOURCE。因为preload()方法默认是预加载的原始图片大小，而into()方法则默认会根据ImageView控件的大小来动态决定加载图片的大小。因此，如果不将diskCacheStrategy的缓存策略指定成DiskCacheStrategy.SOURCE的话，很容易会造成我们在预加载完成之后再使用into()方法加载图片，却仍然还是要从网络上去请求图片这种现象。</p>
+<h2 id="submit方法">submit()方法</h2>
+<p>这个在Glide3.X中是downloadOnly()方法，就是下载图片的意思。<br>
+话不多说，上源码：<br>
+<img src="http://localhost:4000/post-images/1573026186125.png" alt="" loading="lazy"><br>
+这里可以看到，他和preload()特别像，最后都调用了into()方法，并传入一个特殊的Target对象。</p>
+<h2 id="target">Target</h2>
+<p>我们看到Glide提供的into()，preload()，submit()这些常用的方法，最后都调用了into(Target)这个方法。那么我们能不能在Target上做写文章呢？答案当然是肯定的，下面举个简单的例子<br>
+<img src="http://localhost:4000/post-images/1573026641308.png" alt="" loading="lazy"><br>
+onResourceReady()这个方法很熟悉吧？我们可以在这里做一些操作，实际上Gilde也是这样做的。</p>
+<h2 id="listener">listener()</h2>
+<p>listener()在into()之前调用，去添加一个监听器，目前只监听了加载成功和加载失败两个状态<br>
+<img src="http://localhost:4000/post-images/1573027424988.png" alt="" loading="lazy"><br>
+需要注意的是：返回false表示事件没有被处理，继续往下传递，返回true表示事件被处理，不再往下传递。</p>
+<p>本节内容就讲完啦，提出一个问题，</p>
+<h3 id="带进度的图片加载是怎么实现的">带进度的图片加载是怎么实现的？</h3>
+<h1 id="郭">郭</h1>
+<h1 id="神">神</h1>
+<h1 id="牛">牛</h1>
+<h1 id="逼">逼</h1>
+<h1 id="鸿">鸿</h1>
+<h1 id="神-2">神</h1>
+<h1 id="牛-2">牛</h1>
+<h1 id="逼-2">逼</h1>
+<p>在刚开始选题的时候，我错误的认为Glide的回调和监听与带进度的Glide加载功能原理是一样的。<br>
+通过学习之后发现<br>
+<img src="http://localhost:4000/post-images/1573027689912.gif" alt="" loading="lazy"><br>
+那带进度的图片加载到底是怎么实现的？且听下回分解。</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="http://localhost:4000/post/20190920">
+              <h3 class="post-title">
+                下一篇：Android四大组件之Activity
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">梦开始的地方</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  2020❤Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'd0c4a5c1ab6ea3db037a',
+        clientSecret: 'a43e84ad9fa25f009243e2305fb8230e4fb6bb6b',
+        repo: 'androidflying.github.io',
+        owner: 'androidflying',
+        admin: ['androidflying'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
